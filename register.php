@@ -1,6 +1,10 @@
 <?php
 // Mulai sesi PHP
 session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login1.php"); // Atau register.php jika belum login
+    exit();
+}
 
 // Include koneksi database
 include 'connection.php';
