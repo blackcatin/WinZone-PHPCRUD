@@ -122,6 +122,66 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+                .footer {
+        background-color: #000957;
+        color: white;
+        min-height: 200px;
+        padding: 40px;
+        text-align: center;
+        margin-top: auto;
+        width: 100%;
+        border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
+        border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+        }
+
+        .footer .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column; /* Mengatur elemen-elemen dalam kolom */
+        align-items: center; /* Menyusun elemen-elemen di tengah secara horizontal */
+        gap: 20px; /* Menambahkan jarak antar elemen */
+        }
+
+        .footer .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        }
+
+        .footer .links {
+        display: flex;
+        gap: 15px;
+        justify-content: center; /* Menyusun link secara horizontal di tengah */
+        }
+
+        .footer .links a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        }
+
+        .footer .links a:hover {
+        text-decoration: underline;
+        }
+
+        .footer .socials {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center; /* Menyusun sosial media secara horizontal di tengah */
+        }
+
+        .footer .socials a {
+        color: white;
+        margin: 0 10px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        }
+
+        .footer .socials a:hover {
+        color: #8a2be2;
+        }
+    </style>
 </head>
 <body>
 
@@ -132,8 +192,6 @@ $result = $conn->query($sql);
         </div>
         <ul>
             <li><a href="indexadmin.php">Home</a></li>
-            <li><a href="#courses">Tips</a></li>
-            <li><a href="Customer.html"><i class="fa-regular fa-bookmark"></i> Bookmark</a></li>
             <li class="dropdown">
                 <button class="btn">
                     <i class="fa-solid fa-user"></i>
@@ -220,6 +278,24 @@ $result = $conn->query($sql);
         <button id="modalOKButton">OK</button>
     </div>
 </div>
+
+<footer class="footer">
+        <div class="container">
+            <div class="logo">Winzone</div>
+            <div class="links">
+                <a href="#">Kontak Kami</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Pasang Iklan</a>
+            </div>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
 
 <script>
 $(document).ready(function() {

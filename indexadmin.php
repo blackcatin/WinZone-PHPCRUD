@@ -1,8 +1,8 @@
 <?php
-session_start(); // Pastikan session dimulai untuk mengambil user_id
-include('connection.php'); // Pastikan koneksi database diatur di file ini
+session_start(); 
+include('connection.php'); 
 
-// Periksa apakah user sudah login dan mendefinisikan variabel $username
+// User login apa belom
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; // Ganti dengan nilai default jika tidak ada sesi
 
 // Proses RSVP
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rsvp'])) {
     $event_id = $_POST['event_id']; // ID event yang dipilih
     $user_id = $_SESSION['user_id']; // ID pengguna yang sedang login
 
-    // Periksa apakah pengguna sudah melakukan RSVP untuk event ini
+    // Pemeriksaan RSVP
     $check_sql = "SELECT * FROM rsvp WHERE user_id = ? AND event_id = ?";
     $stmt = $conn->prepare($check_sql);
     $stmt->bind_param("ii", $user_id, $event_id);
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rsvp'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
-        // Masukkan RSVP ke dalam database
+        // RSVP ke Database
         $rsvp_sql = "INSERT INTO rsvp (user_id, event_id, status) VALUES (?, ?, 'pending')";
         $stmt = $conn->prepare($rsvp_sql);
         $stmt->bind_param("ii", $user_id, $event_id);
@@ -105,81 +105,81 @@ $result = $conn->query($sql);
         }
 
         .lomba {
-    padding: 40px 20px;
-    background-color: #f3f6e7;
-    text-align: center;
-}
+        padding: 40px 20px;
+        background-color: #f3f6e7;
+        text-align: center;
+        }
 
-.lomba h1 {
-    color: #3f09ac;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 40px;
-}
+        .lomba h1 {
+            color: #3f09ac;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
 
-.lomba .row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-}
+        .lomba .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
 
-.lomba .event {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 30%;
-    transition: all 0.3s ease;
-    text-align: center;
-}
+        .lomba .event {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
 
-.lomba .event:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(104, 35, 164, 0.2);
-}
+        .lomba .event:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(104, 35, 164, 0.2);
+        }
 
-.lomba .event h3 {
-    color: #3f09ac;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
+        .lomba .event h3 {
+            color: #3f09ac;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
 
-.lomba .event p {
-    color: #555;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
+        .lomba .event p {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
 
-.lomba .event img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
+        .lomba .event img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
 
-/* Styling untuk tombol RSVP */
-.lomba .rsvp-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        /* Styling untuk tombol RSVP */
+        .lomba .rsvp-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.lomba .rsvp-btn:hover {
-    background-color: #45a049;
-}
+        .lomba .rsvp-btn:hover {
+            background-color: #45a049;
+        }
 
-/* Styling untuk detail acara seperti Tanggal, Rentang Waktu, Lokasi, dan Deskripsi */
-.lomba .event p strong {
-    font-weight: 600;
-    color: #3f09ac;
-}
+        /* Styling untuk detail acara seperti Tanggal, Rentang Waktu, Lokasi, dan Deskripsi */
+        .lomba .event p strong {
+            font-weight: 600;
+            color: #3f09ac;
+        }
 
 
         .rsvp-btn {
@@ -197,6 +197,65 @@ $result = $conn->query($sql);
             background-color: #45a049;
         }
 
+        .footer {
+        background-color: #000957;
+        color: white;
+        min-height: 200px;
+        padding: 40px;
+        text-align: center;
+        margin-top: auto;
+        width: 100%;
+        border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
+        border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+        }
+
+        .footer .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column; /* Mengatur elemen-elemen dalam kolom */
+        align-items: center; /* Menyusun elemen-elemen di tengah secara horizontal */
+        gap: 20px; /* Menambahkan jarak antar elemen */
+        }
+
+        .footer .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        }
+
+        .footer .links {
+        display: flex;
+        gap: 15px;
+        justify-content: center; /* Menyusun link secara horizontal di tengah */
+        }
+
+        .footer .links a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        }
+
+        .footer .links a:hover {
+        text-decoration: underline;
+        }
+
+        .footer .socials {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center; /* Menyusun sosial media secara horizontal di tengah */
+        }
+
+        .footer .socials a {
+        color: white;
+        margin: 0 10px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        }
+
+        .footer .socials a:hover {
+        color: #8a2be2;
+        }
+
     </style>
 </head>
 <body>
@@ -209,8 +268,6 @@ $result = $conn->query($sql);
 
             <ul>
                 <li><a href="indexadmin.php">Home</a></li>
-                <li><a href="#courses">Tips</a></li>
-                <li><a href="Customer.html"><i class="fa-regular fa-bookmark"></i> Bookmark</a></li>
                 <<li class="dropdown">
                 <button class="btn">
                     <i class="fa-solid fa-user"></i>
@@ -269,6 +326,24 @@ $result = $conn->query($sql);
     <?php endif; ?>
     </div>
 </section>
+
+<footer class="footer">
+        <div class="container">
+            <div class="logo">Winzone</div>
+            <div class="links">
+                <a href="#">Kontak Kami</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Pasang Iklan</a>
+            </div>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
 
 
     <script src="main.js"></script>

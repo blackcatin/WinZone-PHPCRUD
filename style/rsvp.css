@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to top left, #3f09ac , #81208a, #ff42f2);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-left: 20px;  /* Padding kiri */
+    padding-right: 20px; /* Padding kanan */
+}
+
+section nav {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    right: 0;
+    left: 0;
+    z-index: 10; 
+    padding: 10px 80px;
+    position: fixed;
+}
+
+section nav .logo img{
+    width: auto;
+    height: 40px;
+    object-fit: contain;
+    cursor: pointer;
+    display: block;
+}
+
+
+section nav ul{
+    list-style: none;
+}
+
+section nav ul li{
+    display: inline-block;
+    margin: 0 15px;
+}
+
+section nav ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 17px;
+    transition: 0.1s;
+}
+
+section nav ul li a::after{
+    content: '';
+    width: 0;
+    height: 2px;
+    background: #ff3f34;
+    display: block;
+    transition: 0.2s linear;
+}
+
+section nav ul li a:hover::after{
+    width: 100%;
+}
+
+section nav ul li a:hover{
+    color: #ff3f34;
+}
+
+.btn:hover {
+    background: #3f09ac; 
+    color: #fff; 
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(104, 35, 164, 0.4);
+    transition: all 0.3s ease; 
+  }
+
+  /* Dropdown Styling */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.dropdown-content p {
+    color: #3f09ac;
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.dropdown-content a {
+    color: #3f09ac;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown .btn {
+  display: inline-block; 
+  padding: 8px 10px;
+  background: #fff; 
+  color: #3f09ac; 
+  font-size: 16px; 
+  font-weight: 600; 
+  border: none; 
+  border-radius: 50px; 
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1); 
+}
+
+
+
+
+.footer {
+background-color: #000957;
+color: white;
+min-height: 200px;
+padding: 40px;
+text-align: center;
+margin-top: auto;
+width: 100%;
+border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
+border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+}
+
+.footer .container {
+max-width: 1200px;
+margin: 0 auto;
+display: flex;
+flex-direction: column; /* Mengatur elemen-elemen dalam kolom */
+align-items: center; /* Menyusun elemen-elemen di tengah secara horizontal */
+gap: 20px; /* Menambahkan jarak antar elemen */
+}
+
+.footer .logo {
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.footer .links {
+display: flex;
+gap: 15px;
+justify-content: center; /* Menyusun link secara horizontal di tengah */
+}
+
+.footer .links a {
+color: white;
+text-decoration: none;
+font-size: 1rem;
+}
+
+.footer .links a:hover {
+text-decoration: underline;
+}
+
+.footer .socials {
+margin-top: 15px;
+display: flex;
+justify-content: center; /* Menyusun sosial media secara horizontal di tengah */
+}
+
+.footer .socials a {
+color: white;
+margin: 0 10px;
+font-size: 1.2rem;
+text-decoration: none;
+}
+
+.footer .socials a:hover {
+color: #8a2be2;
+}

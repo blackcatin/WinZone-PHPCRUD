@@ -194,7 +194,7 @@ section nav ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .event-list .col {
@@ -202,7 +202,7 @@ section nav ul li a:hover {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    width: calc(25% -20px);
     transition: all 0.3s ease;
     text-align: center;
 }
@@ -301,5 +301,64 @@ section nav ul li a:hover {
 
 .delete-btn:hover {
     background-color: #cc0000;
+}
+
+.footer {
+    background-color: #000957;
+    color: white;
+    min-height: 200px;
+    padding: 40px;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+    border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
+    border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+}
+
+.footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Mengatur elemen-elemen dalam kolom */
+    align-items: center; /* Menyusun elemen-elemen di tengah secara horizontal */
+    gap: 20px; /* Menambahkan jarak antar elemen */
+}
+
+.footer .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.footer .links {
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* Menyusun link secara horizontal di tengah */
+}
+
+.footer .links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.footer .links a:hover {
+    text-decoration: underline;
+}
+
+.footer .socials {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center; /* Menyusun sosial media secara horizontal di tengah */
+}
+
+.footer .socials a {
+    color: white;
+    margin: 0 10px;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.footer .socials a:hover {
+    color: #8a2be2;
 }
 
