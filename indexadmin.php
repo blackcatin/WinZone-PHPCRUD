@@ -2,34 +2,31 @@
 session_start(); 
 include('connection.php'); 
 
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    header('Location: login1.php');
+    exit();
+}
+
 // User login apa belom
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; // Ganti dengan nilai default jika tidak ada sesi
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
 // Proses RSVP
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['rsvp'])) {
-    $event_id = $_POST['event_id']; // ID event yang dipilih
-    $user_id = $_SESSION['user_id']; // ID pengguna yang sedang login
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
+    $event_id = $_POST['event_id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $no_telp = $_POST['no_telp'];
+    $nama_sekolah = $_POST['nama_sekolah'];
 
-    // Pemeriksaan RSVP
-    $check_sql = "SELECT * FROM rsvp WHERE user_id = ? AND event_id = ?";
-    $stmt = $conn->prepare($check_sql);
-    $stmt->bind_param("ii", $user_id, $event_id);
+    $sql = "INSERT INTO rsvp (event_id, user_id, name, email, no_telp, nama_sekolah) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iissss", $event_id, $user_id, $name, $email, $no_telp, $nama_sekolah);
     $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows == 0) {
-        // RSVP ke Database
-        $rsvp_sql = "INSERT INTO rsvp (user_id, event_id, status) VALUES (?, ?, 'pending')";
-        $stmt = $conn->prepare($rsvp_sql);
-        $stmt->bind_param("ii", $user_id, $event_id);
-        if ($stmt->execute()) {
-            echo "<script>alert('RSVP berhasil!');</script>";
-        } else {
-            echo "<script>alert('Gagal melakukan RSVP.');</script>";
-        }
-    } else {
-        echo "<script>alert('Anda sudah melakukan RSVP untuk event ini.');</script>";
-    }
+    // Redirect to My Event page
+    header('Location: myevent.php');
+    exit;
 }
 
 // Ambil data event dari database
@@ -277,7 +274,7 @@ $result = $conn->query($sql);
 
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
                         <a href="manage_events.php">Manage Events</a>
-                        <a href="rsvp.php">RSVP</a>
+                        <a href="myevent.php">RSVP</a>
                     <?php endif; ?>
 
                     <a href="register.php">Logout</a>
@@ -315,10 +312,7 @@ $result = $conn->query($sql);
                 <p><strong>Deskripsi:</strong> <?= htmlspecialchars($row['description']); ?></p>
                 
                 <!-- Tombol RSVP -->
-                <form method="POST" action="">
-                    <input type="hidden" name="event_id" value="<?= $row['event_id']; ?>">
-                    <button type="submit" name="rsvp" class="rsvp-btn">RSVP</button>
-                </form>
+                <button class="rsvp-btn" onclick="openRSVPForm(<?= $row['event_id']; ?>)">RSVP</button>
             </div>
         <?php endwhile; ?>
     <?php else: ?>

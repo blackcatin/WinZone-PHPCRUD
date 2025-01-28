@@ -8,24 +8,6 @@ header('Content-Type: text/html; charset=UTF-8');
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; 
 
-// Ambil data bookmark jika user sudah login
-$bookmarked_events = [];
-if ($user_id) {
-    $query = "SELECT events.name, events.date, events.location 
-              FROM bookmark 
-              JOIN events ON bookmark.event_id = events.event_id 
-              WHERE bookmark.user_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('i', $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $bookmarked_events[] = $row; // Simpan data bookmark ke array
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +37,7 @@ if ($user_id) {
                     </button>
                     <div class="dropdown-content">
                     <p>Selamat Datang, <b><?= htmlspecialchars($username); ?></b></p>
-                    <a href="myevent.php">My Event</a>
+                    <a href="rsvp.php">My Event</a>
                     <a href="login1.php">Logout</a> <!-- Perbaiki link logout -->
                 </div>
                 </li>

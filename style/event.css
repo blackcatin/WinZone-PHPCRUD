@@ -180,6 +180,7 @@ section nav ul li a:hover {
 .event-list {
     padding: 30px 20px;
     background-color: #f3f6e7;
+
 }
 
 .event-list h2 {
@@ -194,17 +195,17 @@ section nav ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .event-list .col {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: calc(25% -20px);
-    transition: all 0.3s ease;
-    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(25% - 20px);
+    max-width: calc(25% - 20px);
+    transition: transform 0.3s ease;
 }
 
 .event-list .col:hover {
@@ -297,6 +298,7 @@ section nav ul li a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+    align-self: center;
 }
 
 .delete-btn:hover {
@@ -361,4 +363,97 @@ section nav ul li a:hover {
 .footer .socials a:hover {
     color: #8a2be2;
 }
+
+/* Container utama untuk event (gunakan flexbox) */
+.event-container {
+    display: flex;
+    flex-wrap: wrap;  /* Agar event pindah ke baris baru jika layar sempit */
+    justify-content: space-between; /* Jarak antar event */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Setiap kartu event */
+.event-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    width: calc(25% - 20px); /* 4 kolom dalam 1 baris */
+    box-sizing: border-box;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+/* Styling untuk judul event */
+.event-card h3 {
+    font-size: 1.5rem;
+    color: #3f09ac;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk gambar event */
+.event-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Styling untuk teks event */
+.event-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Tombol Edit & Hapus */
+.event-card button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: white;
+    margin-top: 5px;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Responsif: 2 kolom di tablet */
+@media (max-width: 1024px) {
+    .event-card {
+        width: calc(50% - 20px); /* 2 kolom per baris */
+    }
+}
+
+/* Responsif: 1 kolom di HP */
+@media (max-width: 768px) {
+    .event-card {
+        width: 100%; /* 1 kolom per baris */
+    }
+}
+
 

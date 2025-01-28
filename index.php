@@ -2,7 +2,6 @@
 session_start();
 include('connection.php');
 
-// Check if user is logged in
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit;
@@ -27,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     $stmt->execute();
 
     // Redirect to My Event page
-    header('Location: myevent.php');
+    header('Location: rsvp.php');
     exit;
 }
 
@@ -194,6 +193,108 @@ $result = $conn->query($sql);
             background-color: #45a049;
         }
 
+        /* CSS for RSVP Modal */
+
+        #rsvpModal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* On top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */
+        }
+
+        /* Modal content */
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%; /* Default width */
+            max-width: 500px; /* Limit max width */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Form styles */
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-content label {
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .modal-content input:focus {
+            border-color: #4CAF50; /* Highlight color */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .modal-content button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content button:hover {
+            background-color: #45a049;
+        }
+
+        /* Animation for modal */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin-top: 15%;
+            }
+        }
+
         .footer {
         background-color: #000957;
         color: white;
@@ -271,7 +372,7 @@ $result = $conn->query($sql);
                 </button>
                 <div class="dropdown-content">
                     <p>Selamat Datang, <b><?= htmlspecialchars($username); ?></b></p>
-                    <a href="myevent.php">My Event</a>
+                    <a href="rsvp.php">My Event</a>
                     <a href="login1.php">Logout</a> <!-- Perbaiki link logout -->
                 </div>
             </li>

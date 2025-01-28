@@ -1,18 +1,15 @@
 <?php
-// Mulai sesi PHP
 session_start();
-
-// Include koneksi database
 include 'connection.php';
 
 // Periksa apakah formulir telah disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari formulir
-    $username = htmlspecialchars(trim($_POST['username']));
-    $password = htmlspecialchars(trim($_POST['password']));
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
 
     // Query untuk mendapatkan user berdasarkan username
-    $sql = "SELECT username, password, role FROM users WHERE username = ?";
+    $sql = "SELECT user_id, username, password, role FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -24,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verifikasi password
         if (password_verify($password, $user['password'])) {
             // Simpan data sesi
+            $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
 

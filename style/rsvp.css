@@ -8,8 +8,8 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to top left, #3f09ac , #81208a, #ff42f2);
-    color: #333;
+    background: #000957;
+    color: #fff;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -136,9 +136,6 @@ section nav ul li a:hover{
   box-shadow: 0 0 10px rgba(0, 0, 0, .1); 
 }
 
-
-
-
 .footer {
 background-color: #000957;
 color: white;
@@ -148,7 +145,7 @@ text-align: center;
 margin-top: auto;
 width: 100%;
 border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
-border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+border-top-right-radius: 20px;
 }
 
 .footer .container {
