@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($role === "admin") {
                     header("Location: indexadmin.php"); // Halaman untuk admin
                 } else {
-                    header("Location: index.php"); // Halaman untuk user biasa
+                    header("Location: login1.php"); // Halaman untuk user biasa
                 }
                 exit();
             } else {
