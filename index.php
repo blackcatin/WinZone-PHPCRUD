@@ -7,11 +7,11 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
-// Get user's ID
+
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest';
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-// Process RSVP
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     $event_id = $_POST['event_id'];
     $name = $_POST['name'];
@@ -19,18 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     $no_telp = $_POST['no_telp'];
     $nama_sekolah = $_POST['nama_sekolah'];
 
-    // Insert RSVP data into database
+
     $sql = "INSERT INTO rsvp (event_id, user_id, name, email, no_telp, nama_sekolah) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iissss", $event_id, $user_id, $name, $email, $no_telp, $nama_sekolah);
     $stmt->execute();
 
-    // Redirect to My Event page
     header('Location: rsvp.php');
     exit;
 }
 
-// Get events from database
 $sql = "SELECT * FROM events";
 $result = $conn->query($sql);
 ?>
@@ -45,7 +43,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
 
-        /* Styling untuk dropdown dan RSVP button */
+      
         .dropdown {
             position: relative;
             display: inline-block;
@@ -101,7 +99,6 @@ $result = $conn->query($sql);
             box-shadow: 0 0 10px rgba(0, 0, 0, .1);
         }
 
-        /* Styling untuk bagian lomba */
         .lomba {
             padding: 40px 20px;
             background-color: #f3f6e7;
@@ -157,7 +154,7 @@ $result = $conn->query($sql);
             margin-bottom: 15px;
         }
 
-        /* Styling untuk tombol RSVP */
+
         .lomba .rsvp-btn {
             background-color: #4CAF50;
             color: white;
@@ -173,7 +170,6 @@ $result = $conn->query($sql);
             background-color: #45a049;
         }
 
-        /* Styling untuk detail acara seperti Tanggal, Rentang Waktu, Lokasi, dan Deskripsi */
         .lomba .event p strong {
             font-weight: 600;
             color: #3f09ac;
@@ -182,7 +178,7 @@ $result = $conn->query($sql);
         .rsvp-btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #4CAF50; /* Hijau */
+            background-color: #4CAF50; 
             color: white;
             border: none;
             border-radius: 5px;
@@ -204,23 +200,23 @@ $result = $conn->query($sql);
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6); 
         }
 
-        /* Modal content */
+        
         .modal-content {
             background-color: #fff;
-            margin: 10% auto; /* 10% from the top and centered */
+            margin: 10% auto; 
             padding: 20px;
             border-radius: 10px;
-            width: 90%; /* Default width */
-            max-width: 500px; /* Limit max width */
+            width: 90%; 
+            max-width: 500px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             animation: fadeIn 0.3s ease-in-out;
         }
 
-        /* Close button */
+    
         .close {
             color: #aaa;
             float: right;
@@ -235,7 +231,7 @@ $result = $conn->query($sql);
             text-decoration: none;
         }
 
-        /* Form styles */
+
         .modal-content form {
             display: flex;
             flex-direction: column;
@@ -259,7 +255,7 @@ $result = $conn->query($sql);
         }
 
         .modal-content input:focus {
-            border-color: #4CAF50; /* Highlight color */
+            border-color: #4CAF50; 
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
@@ -278,7 +274,7 @@ $result = $conn->query($sql);
             background-color: #45a049;
         }
 
-        /* Animation for modal */
+       
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -288,7 +284,6 @@ $result = $conn->query($sql);
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .modal-content {
                 width: 95%;
@@ -304,17 +299,17 @@ $result = $conn->query($sql);
         text-align: center;
         margin-top: auto;
         width: 100%;
-        border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
-        border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+        border-top-left-radius: 20px; 
+        border-top-right-radius: 20px; 
         }
 
         .footer .container {
         max-width: 1200px;
         margin: 0 auto;
         display: flex;
-        flex-direction: column; /* Mengatur elemen-elemen dalam kolom */
-        align-items: center; /* Menyusun elemen-elemen di tengah secara horizontal */
-        gap: 20px; /* Menambahkan jarak antar elemen */
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
         }
 
         .footer .logo {
@@ -325,7 +320,7 @@ $result = $conn->query($sql);
         .footer .links {
         display: flex;
         gap: 15px;
-        justify-content: center; /* Menyusun link secara horizontal di tengah */
+        justify-content: center; 
         }
 
         .footer .links a {
@@ -341,7 +336,7 @@ $result = $conn->query($sql);
         .footer .socials {
         margin-top: 15px;
         display: flex;
-        justify-content: center; /* Menyusun sosial media secara horizontal di tengah */
+        justify-content: center; 
         }
 
         .footer .socials a {
@@ -374,7 +369,7 @@ $result = $conn->query($sql);
                 <div class="dropdown-content">
                     <p>Selamat Datang, <b><?= htmlspecialchars($username); ?></b></p>
                     <a href="rsvp.php">My Event</a>
-                    <a href="login1.php">Logout</a> <!-- Perbaiki link logout -->
+                    <a href="login1.php">Logout</a> 
                 </div>
             </li>
         </ul>
@@ -408,7 +403,7 @@ $result = $conn->query($sql);
                     <p><strong>Lokasi:</strong> <?= htmlspecialchars($row['location']); ?></p>
                     <p><strong>Deskripsi:</strong> <?= htmlspecialchars($row['description']); ?></p>
                     
-                    <!-- Tombol RSVP -->
+
                     <button class="rsvp-btn" onclick="openRSVPForm(<?= $row['event_id']; ?>)">RSVP</button>
                 </div>
             <?php endwhile; ?>
@@ -418,7 +413,7 @@ $result = $conn->query($sql);
     </div>
 </section>
 
-<!-- Modal Popup -->
+
 <div id="rsvpModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeRSVPForm()">&times;</span>
@@ -447,7 +442,7 @@ $result = $conn->query($sql);
 </div>
 
 <script>
-    // JavaScript untuk mengontrol modal popup
+   
     function openRSVPForm(eventId) {
         document.getElementById('event_id').value = eventId;
         document.getElementById('rsvpModal').style.display = 'block';
@@ -457,7 +452,7 @@ $result = $conn->query($sql);
         document.getElementById('rsvpModal').style.display = 'none';
     }
 
-    // Tutup modal saat user mengklik di luar konten
+   
     window.onclick = function(event) {
         if (event.target == document.getElementById('rsvpModal')) {
             closeRSVPForm();

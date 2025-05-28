@@ -1,33 +1,28 @@
 <?php
-// Mulai sesi PHP
 session_start();
 if (!isset($_SESSION['username'])) {
-    header("Location: login1.php"); // Atau register.php jika belum login
+    header("Location: login1.php"); 
     exit();
 }
 
-// Include koneksi database
+
 include 'connection.php';
 
-// Periksa apakah formulir telah disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari formulir
+    
     $username = htmlspecialchars(trim($_POST['username']));
     $email = htmlspecialchars(trim($_POST['email']));
     $password = htmlspecialchars(trim($_POST['password']));
     $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
 
-    // Validasi data
+ 
     if ($password !== $confirm_password) {
         $error_message = "Password dan Konfirmasi Password tidak cocok!";
     } else {
-        // Tentukan role berdasarkan username
         $role = ($username === "admin1") ? "admin" : "user";
 
-        // Hash password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Query untuk memeriksa apakah username atau email sudah ada
         $sql_check = "SELECT * FROM users WHERE username = ? OR email = ?";
         $stmt_check = $conn->prepare($sql_check);
         $stmt_check->bind_param("ss", $username, $email);
@@ -35,25 +30,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result_check = $stmt_check->get_result();
 
         if ($result_check->num_rows > 0) {
-            // Jika username atau email sudah ada, tampilkan pesan error
             $error_message = "Username atau Email sudah terdaftar!";
         } else {
-            // Query untuk memasukkan data ke tabel users
             $sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ssss", $username, $email, $hashed_password, $role);
 
-            // Eksekusi query
             if ($stmt->execute()) {
-                // Simpan data sesi
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $role;
-
-                // Arahkan pengguna ke halaman yang sesuai
                 if ($role === "admin") {
-                    header("Location: indexadmin.php"); // Halaman untuk admin
+                    header("Location: indexadmin.php"); 
                 } else {
-                    header("Location: login1.php"); // Halaman untuk user biasa
+                    header("Location: login1.php"); 
                 }
                 exit();
             } else {

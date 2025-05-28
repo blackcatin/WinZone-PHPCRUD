@@ -2,22 +2,20 @@
 session_start();
 include('connection.php');
 
-// Check if user is logged in
+
 if (!isset($_SESSION['username']) || !isset($_SESSION['user_id'])) {
     header('Location: login1.php');
     exit;
 }
 
-// Get user's ID
+
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
 
-// ✅ Perbaiki pengecekan user_id
 if (!$user_id) {  
     die("Error: user_id tidak ditemukan. Pastikan Anda sudah login.");
 }
 
-// ✅ Query hanya mengambil RSVP milik user yang login
 $sql = "SELECT rsvp.rsvp_id, rsvp.name, rsvp.email, rsvp.no_telp, rsvp.nama_sekolah, 
                events.event_id, events.name AS event_name, events.date, events.start_time, 
                events.end_time, events.location, events.description

@@ -2,13 +2,9 @@
 session_start();
 include 'connection.php';
 
-// Periksa apakah formulir telah disubmit
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil data dari formulir
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
-
-    // Query untuk mendapatkan user berdasarkan username
     $sql = "SELECT user_id, username, password, role FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
@@ -18,18 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        // Verifikasi password
         if (password_verify($password, $user['password'])) {
-            // Simpan data sesi
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['role'] = $user['role'];
 
-            // Arahkan pengguna ke halaman yang sesuai berdasarkan role
             if ($user['role'] === "admin") {
-                header("Location: indexadmin.php"); // Halaman Admin
+                header("Location: indexadmin.php"); 
             } else {
-                header("Location: index.php"); // Halaman User biasa
+                header("Location: index.php"); 
             }
             exit();
         } else {

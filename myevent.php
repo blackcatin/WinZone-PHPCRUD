@@ -2,18 +2,17 @@
 session_start();
 include('connection.php');
 
-// Pastikan pengguna sudah login
+
 if (!isset($_SESSION['username']) || !isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     header('Location: login1.php');
     exit;
 }
 
-// Ambil informasi user dari session
 $username = $_SESSION['username'];
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role'];
 
-// Query untuk admin melihat semua RSVP
+
 if ($role === 'admin') {
     $sql = "SELECT rsvp.rsvp_id, rsvp.user_id, rsvp.name, rsvp.email, rsvp.no_telp, rsvp.nama_sekolah, 
                    events.event_id, events.name AS event_name, events.date, events.start_time, 
@@ -21,7 +20,7 @@ if ($role === 'admin') {
             FROM rsvp
             JOIN events ON rsvp.event_id = events.event_id";
 } else {
-    // Query untuk user hanya melihat RSVP miliknya
+
     $sql = "SELECT rsvp.rsvp_id, rsvp.user_id, rsvp.name, rsvp.email, rsvp.no_telp, rsvp.nama_sekolah, 
                    events.event_id, events.name AS event_name, events.date, events.start_time, 
                    events.end_time, events.location, events.description

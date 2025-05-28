@@ -11,12 +11,11 @@ $role = $_SESSION['role'] ?? '';
 
 include 'connection.php';
 
-// 🔹 Simpan notifikasi dalam variabel lalu hapus session
+
 $eventUpdated = $_SESSION['event_updated'] ?? null;
 $eventAdded = $_SESSION['event_added'] ?? null;
 $eventDeleted = $_SESSION['event_deleted'] ?? null;
 
-// 🔹 Hapus session setelah menyimpannya agar modal tidak muncul setelah refresh
 unset($_SESSION['event_updated']);
 unset($_SESSION['event_added']);
 unset($_SESSION['event_deleted']);
@@ -26,7 +25,7 @@ function validateInput($data) {
 }
 
 define('UPLOAD_DIR', 'uploads/');
-define('MAX_FILE_SIZE', 2 * 1024 * 1024); // 2MB
+define('MAX_FILE_SIZE', 2 * 1024 * 1024); 
 $allowed_ext = ['jpg', 'jpeg', 'png', 'gif'];
 
 function handleFileUpload($file, $oldFile = null) {
@@ -61,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $action = $_POST['form_action'] ?? '';
 
     if ($action === 'insert_event') {
-        // Insert Event
+
         $event_name = validateInput($_POST['event_name']);
         $event_date = validateInput($_POST['event_date']);
         $start_time = $_POST['start_time'] ?? '00:00:00';
@@ -83,7 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: manage_events.php");
         exit();
     } elseif ($action === 'update_event') {
-        // Update Event
         $event_id = $_POST['event_id'];
         $event_name = validateInput($_POST['event_name']);
         $event_date = validateInput($_POST['event_date']);
@@ -106,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: manage_events.php");
         exit();
     } elseif ($action === 'delete_event') {
-        // Delete Event
+
         $event_id = $_POST['delete_event_id'];
         $event_image = $_POST['delete_event_image'];
 
@@ -127,7 +125,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Ambil daftar event
 $sql = "SELECT * FROM events ORDER BY event_id DESC";
 $result = $conn->query($sql);
 ?>
@@ -145,14 +142,14 @@ $result = $conn->query($sql);
 
     <style>
         .modal {
-        display: none; /* Hidden by default */
+        display: none; 
         position: fixed;
         z-index: 1000;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.6); /* Semi transparan */
+        background-color: rgba(0, 0, 0, 0.6); 
         display: flex;
         justify-content: center;
         align-items: center;
@@ -376,7 +373,6 @@ $result = $conn->query($sql);
 <script>
 $(document).ready(function () {
     $("#editModal, #confirmDeleteModal").hide();
-    // ✅ Buka modal Edit hanya saat tombol "Edit" diklik
     $(".edit-btn").off().on("click", function () {
         closeAllModals();
         $("#edit_event_id").val($(this).data("id"));
@@ -405,7 +401,6 @@ $(document).ready(function () {
         }
     });
 
-    // ✅ Fungsi untuk menutup modal Edit
     function closeEditModal() {
         $("#editModal").fadeOut();
         setTimeout(() => {
@@ -427,17 +422,15 @@ $(document).ready(function () {
     }
 
     $(".delete-btn").off().on("click", function (event) {
-        event.preventDefault(); // Mencegah submit otomatis
-
+        event.preventDefault(); 
         let eventId = $(this).closest("form").find("input[name='delete_event_id']").val();
         let eventName = $(this).closest(".event-card").find("h3").text();
 
-        $("#confirmDeleteModal").fadeIn(); // ✅ Munculkan modal konfirmasi
-        $("#deleteEventName").text(eventName); // ✅ Set nama event di modal
-        $("#confirmDeleteButton").data("event-id", eventId); // ✅ Simpan ID event yang akan dihapus
+        $("#confirmDeleteModal").fadeIn(); 
+        $("#deleteEventName").text(eventName); /
+        $("#confirmDeleteButton").data("event-id", eventId); 
     });
 
-    // ✅ Jika user menekan "Ya, Hapus", event akan dihapus
     $("#confirmDeleteButton").off().on("click", function () {
         let eventId = $(this).data("event-id");
         let form = $("form input[name='delete_event_id'][value='" + eventId + "']").closest("form");
@@ -448,19 +441,17 @@ $(document).ready(function () {
         }, 300);
     });
 
-    // ✅ Jika user menekan "Batal", modal konfirmasi akan ditutup
     $("#cancelDeleteButton, .close-delete-modal").off().on("click", function () {
         $("#confirmDeleteModal").fadeOut();
     });
 
-    // ✅ Fungsi notifikasi agar modal tidak muncul setelah refresh
+
     function showNotification(message) {
         closeEditModal();
         alert(message);
         $("#confirmDeleteModal").fadeOut();
     }
 
-    // ✅ Notifikasi setelah perubahan
     <?php if ($eventUpdated !== null): ?>
         showNotification("<?= $eventUpdated ? '✅ Event berhasil diperbarui!' : '❌ Gagal memperbarui event.'; ?>");
     <?php endif; ?>

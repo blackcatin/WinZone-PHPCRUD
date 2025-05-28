@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('connection.php'); // Pastikan file ini benar dan terhubung ke database
+include('connection.php'); 
 
 header('Content-Type: text/html; charset=UTF-8');
 
-// Periksa apakah user sudah login dan ambil username
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; 
 
@@ -21,7 +20,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
     <link rel="stylesheet" href="./style/bookmark.css">
 </head>
 <body>
-    <!-- Navbar -->
+  
     <section id="Home">
         <nav>
             <div class="logo">
@@ -38,14 +37,13 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                     <div class="dropdown-content">
                     <p>Selamat Datang, <b><?= htmlspecialchars($username); ?></b></p>
                     <a href="rsvp.php">My Event</a>
-                    <a href="login1.php">Logout</a> <!-- Perbaiki link logout -->
+                    <a href="login1.php">Logout</a> 
                 </div>
                 </li>
             </ul>
         </nav>
     </section>
 
-    <!-- Main Content -->
     <main class="main">
         <section class="hero">
             <h1>Bookmark</h1>
@@ -67,7 +65,6 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="logo">Winzone</div>

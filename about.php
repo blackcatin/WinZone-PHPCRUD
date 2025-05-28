@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('connection.php'); // Pastikan file ini benar dan terhubung ke database
+include('connection.php'); 
 
 header('Content-Type: text/html; charset=UTF-8');
 
-// Periksa apakah user sudah login dan ambil username
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; 
 
@@ -21,7 +20,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
     <link rel="stylesheet" href="./style/about.css">
 </head>
 <body>
-    <!-- Navbar -->
+
     <section id="Home">
         <nav>
             <div class="logo">
@@ -38,14 +37,13 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
                     <div class="dropdown-content">
                     <p>Selamat Datang, <b><?= htmlspecialchars($username); ?></b></p>
                     <a href="rsvp.php">My Event</a>
-                    <a href="login1.php">Logout</a> <!-- Perbaiki link logout -->
+                    <a href="login1.php">Logout</a> 
                 </div>
                 </li>
             </ul>
         </nav>
     </section>
 
-    <!-- Main Content -->
     <main class="main">
         <section class="hero">
             <h1>About Us</h1>
@@ -66,7 +64,6 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
             </div>
         </section>
 
-      <!-- Our Services -->
       <section class="container">
         <h2>Our Services</h2>
         <div class="service-box">
@@ -86,20 +83,6 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         </div>
     </section>    
 
-        <!-- Tentang Perusahaan Section -->
-        <!-- <section id="company" class="company">
-            <div class="content">
-                <h1>Let's Know</h1>
-                <p>
-                    At <b>InfoLomba</b>, we are committed to connecting students, professionals, and enthusiasts with the best competitions available. Whether it's academic challenges, creative contests, or skill-building opportunities, InfoLomba is your go-to platform for discovering and participating in events that inspire growth and excellence.
-                </p>
-                <p>
-                    Our mission is to empower individuals by providing easy access to competition details, tips for success, and tools to manage your bookmarks. Let us help you unlock your potential and achieve your dreams!
-                </p>
-            </div>
-        </section> -->
-
-         <!-- Testimonials -->
     <section class="container">
         <h2>What Our Users Say</h2>
         <div class="testimonial-box">
@@ -112,8 +95,7 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
         </div>
     </section>
     </main>
-
-    <!-- Footer -->
+    
     <footer class="footer">
         <div class="container">
             <div class="logo">Winzone</div>

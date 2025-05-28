@@ -7,11 +7,10 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// User login apa belom
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; // Ganti dengan nilai default jika tidak ada sesi
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-// Proses RSVP
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     $event_id = $_POST['event_id'];
     $name = $_POST['name'];
@@ -24,12 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     $stmt->bind_param("iissss", $event_id, $user_id, $name, $email, $no_telp, $nama_sekolah);
     $stmt->execute();
 
-    // Redirect to My Event page
     header('Location: myevent.php');
     exit;
 }
-
-// Ambil data event dari database
 $sql = "SELECT * FROM events";
 $result = $conn->query($sql);
 ?>
@@ -45,7 +41,7 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Mansalva&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Dropdown Styling */
+        
         .dropdown {
             position: relative;
             display: inline-block;
@@ -172,7 +168,6 @@ $result = $conn->query($sql);
             background-color: #45a049;
         }
 
-        /* Styling untuk detail acara seperti Tanggal, Rentang Waktu, Lokasi, dan Deskripsi */
         .lomba .event p strong {
             font-weight: 600;
             color: #3f09ac;
@@ -182,7 +177,7 @@ $result = $conn->query($sql);
         .rsvp-btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #4CAF50; /* Hijau */
+            background-color: #4CAF50; 
             color: white;
             border: none;
             border-radius: 5px;
@@ -202,17 +197,17 @@ $result = $conn->query($sql);
         text-align: center;
         margin-top: auto;
         width: 100%;
-        border-top-left-radius: 20px; /* Sudut melengkung bagian kiri atas */
-        border-top-right-radius: 20px; /* Sudut melengkung bagian kanan atas */
+        border-top-left-radius: 20px; 
+        border-top-right-radius: 20px; 
         }
 
         .footer .container {
         max-width: 1200px;
         margin: 0 auto;
         display: flex;
-        flex-direction: column; /* Mengatur elemen-elemen dalam kolom */
-        align-items: center; /* Menyusun elemen-elemen di tengah secara horizontal */
-        gap: 20px; /* Menambahkan jarak antar elemen */
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
         }
 
         .footer .logo {
@@ -223,7 +218,7 @@ $result = $conn->query($sql);
         .footer .links {
         display: flex;
         gap: 15px;
-        justify-content: center; /* Menyusun link secara horizontal di tengah */
+        justify-content: center; 
         }
 
         .footer .links a {
@@ -239,7 +234,7 @@ $result = $conn->query($sql);
         .footer .socials {
         margin-top: 15px;
         display: flex;
-        justify-content: center; /* Menyusun sosial media secara horizontal di tengah */
+        justify-content: center; 
         }
 
         .footer .socials a {
@@ -310,8 +305,7 @@ $result = $conn->query($sql);
                 <p><strong>Rentang Waktu:</strong> <?= htmlspecialchars($row['start_time']) ?> - <?= htmlspecialchars($row['end_time']) ?></p>
                 <p><strong>Lokasi:</strong> <?= htmlspecialchars($row['location']); ?></p>
                 <p><strong>Deskripsi:</strong> <?= htmlspecialchars($row['description']); ?></p>
-                
-                <!-- Tombol RSVP -->
+           
                 <button class="rsvp-btn" onclick="openRSVPForm(<?= $row['event_id']; ?>)">RSVP</button>
             </div>
         <?php endwhile; ?>
