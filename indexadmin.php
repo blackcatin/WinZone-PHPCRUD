@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     header('Location: myevent.php');
     exit;
 }
-$sql = "SELECT * FROM events";
+$sql = "SELECT * FROM event";
 $result = $conn->query($sql);
 ?>
 
@@ -301,7 +301,7 @@ $result = $conn->query($sql);
                 <?php if (!empty($row['image'])): ?>
                     <img src="<?= htmlspecialchars($row['image']); ?>" alt="Event Image" class="event-image">
                 <?php endif; ?>
-                <p><strong>Tanggal:</strong> <?= htmlspecialchars($row['date']); ?></p>
+                <p><strong>Tanggal:</strong> <?= htmlspecialchars($row['date_begin']); ?></p>
                 <p><strong>Rentang Waktu:</strong> <?= htmlspecialchars($row['start_time']) ?> - <?= htmlspecialchars($row['end_time']) ?></p>
                 <p><strong>Lokasi:</strong> <?= htmlspecialchars($row['location']); ?></p>
                 <p><strong>Deskripsi:</strong> <?= htmlspecialchars($row['description']); ?></p>

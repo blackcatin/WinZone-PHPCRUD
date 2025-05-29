@@ -26,10 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_rsvp'])) {
     $stmt->execute();
 
     header('Location: rsvp.php');
-    exit;
-}
+    exit;}
 
-$sql = "SELECT * FROM events";
+$sql = "SELECT * FROM event";
 $result = $conn->query($sql);
 ?>
 
